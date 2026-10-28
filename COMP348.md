@@ -38,13 +38,18 @@ Links:
   - 7.2: Basic Data Types
   - 7.3: Composite Data Types
   - 7.4: Computational Complexity
-- Module 8
-  - 8.1: List Extensions
-  - 8.2: Dictionaries
-  - 8.3: Tuples and Sets
+- Module 8[#module-8]
+  - 8.1: List Extensions[#module-81-list-extensions]
+  - 8.2: Dictionaries[#module-82-dictionaries]
+  - 8.3: Tuples and Sets[#module-83-tuples-and-sets]
 - Module 9[#module-9]
-  - 9.1: Control Flow
-  - 9.2: Python Functions
+  - 9.1: Control Flow[#module-91-control-flow]
+  - 9.2: Python Functions[#module-92-python-functions]
+
+# Module 8
+## 8.1: List Extensions
+## Module 8.2: Dictionaries
+## Module 8.3: Tuples and Sets
 
 # Module 9
 ## Module 9.1: Control Flow
