@@ -42,12 +42,12 @@ Links:
   - 8.1: List Extensions
   - 8.2: Dictionaries
   - 8.3: Tuples and Sets
-- Module 9
+- Module 9[#module-9]
   - 9.1: Control Flow
   - 9.2: Python Functions
 
 # Module 9
-## Module 9.1
+## Module 9.1: Control Flow
 ### Introduction
 - Basic Structure of a Python Program
 - Indentation
@@ -136,7 +136,7 @@ Conditional operations are similar to other languages and include:
   - Is
   - Is not
 
-## Module 9.2
+## Module 9.2: Python Functions
 ### Python Functions
 - Python provides function definition
 ``` python
