@@ -1,3 +1,51 @@
+# COMP 348 - Principles of Programming Language
+Class on different types of programming languages
+Midterm: Nov 4th, in class
+Midterm material: up to end of Module 9
+Final:
+
+Links:
+- Module 1
+  - 1.1: Introduction
+  - 1.2: Language Evaluation
+  - 1.3: Influences on Language Design
+  - 1.4: Implementation
+- Module 2
+  - 2.1: Historical Language Evolution
+  - 2.2: The Early High-level Languages
+  - 2.3: New Language Concepts
+  - 2.4: Object Orientation and the Modern-Era
+- Module 3
+  - 3.1: Intro to C
+  - 3.2: Preprocessing and Header Files
+  - 3.3: Console Display
+- Module 4
+  - 4.1: Functions and Files
+  - 4.2: Creating Header Files
+  - 4.3: Visibility
+- Module 5
+  - 5.1: Basic Data Types
+  - 5.2: Arrays and Structs
+  - 5.3: Static and Automatic Memory Allocation
+  - 5.4: Dynamic Memory Allocation
+  - 5.5: C Strings
+  - 5.6: Parameter Passing
+- Module 6
+  - 6.1: Debugging
+  - 6.2: Profiling
+- Module 7
+  - 7.1: Python Intro
+  - 7.2: Basic Data Types
+  - 7.3: Composite Data Types
+  - 7.4: Computational Complexity
+- Module 8
+  - 8.1: List Extensions
+  - 8.2: Dictionaries
+  - 8.3: Tuples and Sets
+- Module 9
+  - 9.1: Control Flow
+  - 9.2: Python Functions
+
 # Module 9
 ## Module 9.1
 ### Introduction
