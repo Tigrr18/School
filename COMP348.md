@@ -36,8 +36,8 @@ Links:
 - Module 7
   - 7.1: Python Intro
   - 7.2: Basic Data Types
-  - 7.3: Composite Data Types
-  - 7.4: Computational Complexity
+  - [7.3: Composite Data Types](#module74)
+  - [7.4: Computational Complexity](#module74-computational-complexity)
 - [Module 8](#module-8)
   - [8.1: List Extensions](#module-81-list-extensions)
   - [8.2: Dictionaries](#module-82-dictionaries)
@@ -46,8 +46,14 @@ Links:
   - [9.1: Control Flow](#module-91-control-flow)
   - [9.2: Python Functions](#module-92-python-functions)
 
+# Module 7
+## 7.1: Python Intro
+## 7.2: Basic Data Types
+## 7.3: Composite Data Types
+## 7.4: Computational Complexity
+
 # Module 8
-## 8.1: List Extensions
+## Module 8.1: List Extensions
 ## Module 8.2: Dictionaries
 ## Module 8.3: Tuples and Sets
 
