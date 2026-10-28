@@ -33,10 +33,10 @@ Links:
 - Module 6
   - 6.1: Debugging
   - 6.2: Profiling
-- Module 7
-  - 7.1: Python Intro
-  - 7.2: Basic Data Types
-  - [7.3: Composite Data Types](#module74)
+- [Module 7](#module7)
+  - [7.1: Python Intro](#module71-python-intro)
+  - [7.2: Basic Data Types](#module72-bsaic-data-types)
+  - [7.3: Composite Data Types](#module73-composite-data-types)
   - [7.4: Computational Complexity](#module74-computational-complexity)
 - [Module 8](#module-8)
   - [8.1: List Extensions](#module-81-list-extensions)
