@@ -5,32 +5,32 @@ Midterm material: up to end of Module 9
 Final:
 
 Links:
-- Module 1
+- [Module 1](#module1)
   - 1.1: Introduction
   - 1.2: Language Evaluation
   - 1.3: Influences on Language Design
   - 1.4: Implementation
-- Module 2
+- [Module 2](#module2)
   - 2.1: Historical Language Evolution
   - 2.2: The Early High-level Languages
   - 2.3: New Language Concepts
   - 2.4: Object Orientation and the Modern-Era
-- Module 3
+- [Module 3](#module3)
   - 3.1: Intro to C
   - 3.2: Preprocessing and Header Files
   - 3.3: Console Display
-- Module 4
+- [Module 4](#module4)
   - 4.1: Functions and Files
   - 4.2: Creating Header Files
   - 4.3: Visibility
-- Module 5
+- [Module 5](#module5)
   - 5.1: Basic Data Types
   - 5.2: Arrays and Structs
   - 5.3: Static and Automatic Memory Allocation
   - 5.4: Dynamic Memory Allocation
   - 5.5: C Strings
   - 5.6: Parameter Passing
-- Module 6
+- [Module 6](#module6)
   - 6.1: Debugging
   - 6.2: Profiling
 - [Module 7](#module7)
@@ -45,6 +45,40 @@ Links:
 - [Module 9](#module-9)
   - [9.1: Control Flow](#module-91-control-flow)
   - [9.2: Python Functions](#module-92-python-functions)
+
+# Module 1
+## 1.1: Introduction
+## 1.2: Language Evaluation
+## 1.3: Influences on Language Design
+## 1.4: Implementation
+
+# Module 2
+## 2.1: Historical Language Evolution
+## 2.2: The Early High-level Languages
+## 2.3: New Language Concepts
+## 2.4: Object Orientation and the Modern-Era
+
+# Module 3
+## 3.1: Intro to C
+## 3.2: Preprocessing and Header Files
+## 3.3: Console Display
+
+# Module 4
+## 4.1: Functions and Files
+## 4.2: Creating Header Files
+## 4.3: Visibility
+
+# Module 5
+## 5.1: Basic Data Types
+## 5.2: Arrays and Structs
+## 5.3: Static and Automatic Memory Allocation
+## 5.4: Dynamic Memory Allocation
+## 5.5: C Strings
+## 5.6: Parameter Passing
+
+# Module 6
+## 6.1: Debugging
+## 6.2: Profiling
 
 # Module 7
 ## 7.1: Python Intro
