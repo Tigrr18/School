@@ -173,7 +173,137 @@ Links:
   - The completeness and precision of the language's official definiton
     - ex: proper standardization
 ## 1.3: Influences on Language Design
+### Influences on language design
+- Computer Architecture
+  - Languages are developed around the most prevalent computer architecture, known as the **von Neumann** model
+- Program design methodologies
+  - New software development methodologies led to new programming paradigms and by extension, new programming languages
+### The von Neumann "loop"
+- Instruction processing utilizes a simple **fetch-decode-execute** processing loop
+- A high level representation is as follows:
+  - Initialize the program counter
+  - Repeat until program ends:
+    - Fetch the instructions pointed to by the counter
+    - Increment the program counter
+    - Decode the instruction, using the Control Unit
+    - Execute the instruction using ALU and other circuitry
+      - Read and write to memory if required
+      - Jump to another instruction/location if required
+  - End repeat
+### Computer architecture influence
+- Early language designers knew the physical architecture very well
+- Direct mapping of the von Neumann model becaume the basis for imperative languages
+  - Program variables model memory cells/addresses
+  - Assignments statemenets model data transfer
+    - "X = 4" models a transfer of the value 4 to a memory address
+  - Looping constructs represent efficient iteration
+    - While/for models a simple jump/goto instruction at the assembly level
+### Programming methodologies influence
+- In the early years (1950s and early 1960s) applications were often relatively simple
+  - The primary concern was machine efficiency
+  - In other words, we coded for the benefit of the computer, not the programmer
+- By the late 1960s, "people efficiency" become more important
+  - The focus: readability, better control structures
+- Prominent themes initially included:
+  - Organizing code in "units" that could be independently extended
+  - More structured programming (minimize "go to" jumps)
+  - In summary, we want to avoid haphazard "spaghetti" code
+- By the 1970s we are moving from process-oriented design (i.e. collection of functions) to data-oriented design
+- Main themes include::
+  - Data abstraction (hiding implementation details)
+  - Simple APIs for lists, trees, maps, etc
+- By the mid 1980s, object-oriented programming is becoming common
+  - Objects manage their own state
+  - Data abstraction + inheritance + polymorphism
 ## 1.4: Implementation
+### Language implementation methods
+1. Compilation
+  - Programs are translated into machine language
+  - Common use: large commercial applications
+2. Pure interpretation
+  - Source code is directly processed by another program known as an interpreter
+  - Common use: small programs where prior compilation may not be necessary or even possible
+3. Hybrid implementation systems
+  - A compromise between compilers and pure interpreters
+  - Here, we compile into an intermediate form that is later interpreted by a run-time system
+  - Common use: small and medium sized systems where efficiency/performance is not the first concern
+### Layered few of computer
+- The operating system and language implementation are layered over the computer's machine interface
+- Note that a "hybrid" language (ex Java) actually consists of two levels:
+  - The byte code compiler (ex: javac)
+  - The virtual software tha interprets the byte code at runtime (ex: JVM)
+### Compilation
+- Here, we translate the high-level program (source language) into machine code (machine language)
+  - This gives us relatively slow translation, but very fast execution
+- The compilation process has several phases:
+  1. **Lexical analysis:** converts characters in the source program into *lexical* units
+  2. **Syntax analysis:** transforms lexical units into parse trees that represent the *syntactic structure* of the program
+  3. **Semantic analysis:** generates intermediate code representing the *logical operations* of the program
+    - like a pseudo assebly language
+  4. **Code generation:** final binary machine code is generated
+### The compilation process
+- The logical model of the compiler architecture 
+- In practice, a single framework can support multiple languages and CPUs
+  - We simply plug in different language-specific parsers and/or CPU-specific machine code generators
+### Linking and loading
+- The programmer's code __and__ the system/library code must be combined together into a single executable application
+- **Loading:** The process of identifying the various program components and reading them into memory
+- **Linking:** The process of preparing references to variables and methods across all units so that the code functions as if it has been compiled as one single unit
+  1. **Static** linking: all compiled units are actually combined into a single binary image
+  2. **Dynamic** linking: libraries are loaded on-the-fly (i.e. at runtime) and may be shared across multiple applications
+### Pure interpretation
+- No source code translation is performed until runtime
+  - Easy to port to other platforms since you don't have to generate any machine code
+- Allows data types to be dynamically defined at runtime
+  - Compiled languages generally require types to be pre-defined for the sake of efficiency
+- Slower execution (10 to 100 times slower than compiled programs)
+- It is now rare for traditional high-languages due to performance concerns
+  - Exceptions to this may be found with languages meant to run within web browsers (ex: JavaScript, PHP)
+  - Even here, source code may be converted to a simple intermediate form at runtime
+### Pure interpretation process
+- In comparison to the compiler model, this is a VERY simple design
+  - Small/new languages are often prototyped this way
+  - Production-quality compilers may take several years to develop
+  - A small interpreter can be written in as litte as a few weeks
+### Hybrid implementation systems
+- Represents a compromise between compilers and true interpreters
+  - A high-level language program is translated to an intermediate "language" - often called bytecode - that allows easy interpretation
+  - Conversion can either be done beforehand or at run-time
+- Code execution is faster than pure interpretation, as we do not have to perform lexical analysis, parsing, etc
+- Examples include:
+  - PERL programs are partially compiled into a simple bytecode in order to detect errors before subsequent interpretation
+  - Initial implementations of Java used a sophisticated bytecode that mapped to an artificial CPU
+    - The intermediate form provides portability to any machine that has a byte code interpreter and a run-time system (together, they are called the Java Virtual Machine)
+### Hybrid implementation process
+- In practice, the byte code can take different forms:
+  - It could reseble human readable assembly language
+  - It could be recorded in a binary format
+- Either way, it does NOT correspond to any specific CPU
+### just-in-time implementation systems
+- Here, we initially translate programs to an intermediate format
+- When the byte code version of the program is later executed, an associated language component compiles "popular" functions/methods into CPU-specific machine code
+  - The machine code version is kept for subsequent calls
+- In essence, JIT systems are "delayed" compilers
+- Common examples include:
+  - The JVM (The original byte code is converted into machine code at runtime)
+  - Microsoft's .net languages essentially work the same way
+### Preprocessors
+- A preprocessor examines a source file(s) immediately before the program is compiled
+- It identifies macros (i.e. commands) written in a special macro language and modifies/updates the source code accordingly
+  - Essentially, it substitutes the macro with the new source code
+  - Note that this macro language is NOT the same as the programming language
+- A well-known example: C preprocessor
+  - It expands #include, #define, and similar macros
+  - For example, #include will literally insert the included code into the current source file
+### Summary
+- The study of programming languages is valueable for a number of reasons:
+  - To increase our capacity to use different constructs
+  - It enables us to choose languages more intelligently
+  - It makes learning new languages easier
+- The most important criteria for evaluating programming languages include:
+  - Readability, writability, realiability, cost
+- Major influences on language design have been machine architecture and software development methodologies
+- The primary methods of implementing programming languages are compilation, pure interpretation, and hybrid implementations
 
 # Module 2
 ## 2.1: Historical Language Evolution
@@ -199,7 +329,7 @@ Links:
 ## 5.5: C Strings
 ## 5.6: Parameter Passing
 
-# Module 6
+# Module 6👍
 ## 6.1: Debugging
 ## 6.2: Profiling
 
@@ -296,8 +426,8 @@ Range (4,10,5) #from 4 to 19 by steps of 5
 Conditional operations are similar to other languages and include:
   - <
   - <=
-  - >
-  - >=
+  - \>
+  - \>=
   - ==
   - !=
 - We also have a couple of tests for object identity
