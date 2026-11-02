@@ -307,8 +307,218 @@ Links:
 
 # Module 2
 ## 2.1: Historical Language Evolution
+### Module 2 topics
+- Minimal/direct hardware programming
+  - Machine code
+  - Assembly language
+- Compiled high language high level languages
+  - Fortran
+- Functionnal programming
+  - LISP
+- Atepts at *human friendly* coding
+  - COBOL
+- The first steps towards more structured programming
+  - ALGOL
+- Early dynamic languages
+  - APL
+- The beginnings of data abstraction
+  - SIMULA
+Early descendents of the ALGOLs
+  - The C language
+- Object oriented programming
+  - Smalltalk
+  - C++
+  - Java
+### Genealogy of common languages
+- The chart starts (at the top) with the big domain specific languages (fortran, COBOL, and LISP)
+  - neither Fortran nor COBOL have directly influenced the __sythax__ of many languages
+- LISP leads to most of the common functional languages, including Clojure and Erlang
+- The two OO pioneers (Simula and Smalltalk) lead to different streams (C++/Java versus Objective C)
+- C influenced a broad group of languages, including C++, Java and even Python
+### Machine code/Assebly language
+- Machine code is the binary code that corresponds to the machine's basic instruction set
+- Assembly language is the one-to-one mapping of the human readable mnemonics to the machine instructions
+- Assembly language was developed early in the life of computers (Late 1940s-1950s)
+- However, because of its direct mapping to the machine code, it has little effect on high level language design
+### Minimal hardware programming
+- What was wrong with using machine code?
+  - Poor readability
+  - Poor modifiability
+  - Expression coding was tedious
+    - Ex: ((X*3)+2)/(log(4)) was extremely tedious to code in
+  - Machine deficiencies
+    - In the meginningm, there was no simple indexing mechanisms, so it was hard to manipulate arrays
+- Bottom line: difficult to code reliably and quickly
 ## 2.2: The Early High-level Languages
+### IBM 704 and Fortran
+- **For**mula **Tran**slating System
+- Fortran I: 1957
+  - Designed for the new IBM 704, which had index registers and floating point hardware
+  - Encouraged a __compiled__ programming language because there was no place to hide the cost of interpretation
+    - Before this, slower interpretation was okay since you had to wait for the software to emulate the floating point value anyway
+  - Environment of development
+    - Computers were small and unreliable
+    - Applications were scientific
+    - No programming methodology or tools
+    - Machine efficiency was the most important concern
+### Design process of Fortran
+- Impact of environment on design of Fortran I
+  - No need for dynamically allocated storage
+    - Everything (I.e. data elements) were fixed at compile time
+  - Need good array handling and counting loops
+  - No string handling or any form of sophisticated input/output
+    - Those things were for budiness software (e.g. COBOL)
+### Fortran I overview
+- First implemented version of Fortran:
+  - Names could have up to six characters 
+  - Post-test counting loop (do)
+  - Conditional statements (if)
+  - User-defined subprograms
+  - No explicit data typing statements
+    - Variables beginning with I, J, K, L, M and N were integers, the rest were floats
+- Compiler released in April 1957, after 18 worker-years of effort
+  - For a long time, compilers were REALLY hard to develop
+- No separate compilation (of separate components)
+  - Programs larger than 400 lines rarely compiled correctly, mainly due to poor reliability of 704
+  - The computer would probably fail before the compilation was done
+- Code was very fast
+  - Within a factor of two of machine code
+- Quickly became widely used
+### Fortran versions
+- Fortran II (1958)
+  - Independent compilation
+    - Compile only the parts you are adding/updating
+- Fortran IV (1962)
+  - Explicit type declaration
+  - String handling
+  - If/else structure
+  - ANSI standard in 1966
+- Various updates up to the present time
+### Early Fortran program
+```fortran
+    INTEGER A,B,C
+    READ(5,501) A,B,C
+501 FORMAT(3I5)
+    IF(A.EQ.0 .OR. B.EQ. .OR. C.EQ.0) STOP 1
+    S = (A + B + C) / 2.0
+    AREA = SQRT( S * (S - A) * (S - B) * (S - C))
+    WRITE(6,601) A,B,C,AREA
+601 FORMAT (4H A= ,I5,5H B=,I5,5H C=,I5,8H AREA= ,F10.2,12HSQUARE UNITS)
+    STOP
+    END
+```
+### Fortran evaluation
+- Highly optimizing compilers
+  - Partially enabled by the fact that types and storage of all variables are fixed before run time (eventually became more flexible)
+- Dramatically and permanently changed the way computers are used
+  - That said, it was not a direct influence on the syntax of specific languages
+  - In other words, other languages were not designed to be a "better Fortran"
+### Functional programming: LISP
+- **LIS**T **P**rocessing Language
+  - Designed at MIT by John McCarthy (1958)
+- Syntax is influenced by the __*Lambda Calculus*__
+  - Formal system by Alonzo Church for expressing computation based on function abstraction
+- only two data types are used in LISP:
+  - Atoms
+  - Lists (can contain atoms or other lists)
+- Well suited to AI research at the time:
+  - Recursively Process data/symbols in lists
+  - Symbolic computation (rather than number crunching)
+    - E.g. natural language processing
+### Functional Style
+```lisp
+(DEFUN equal_lists (list1 list2)
+  (COND
+    ( (ATOM list1) (EQ list1 list2) )
+    ( (ATOM list2) NIL )
+    ( (equal_lists (CAR list1) (CAR list2))
+      (equal_lists (CDR list1) (CDR list2)) )
+    (T NIL)
+  )
+)
+```
+### LISP evaulation
+- Pioneered functional programming
+  - no need for variables or assignment statements
+  - Control via recursion and conditional expressions
+  - COMMON LISP, Scheme and now Clojure are contemporary dialects of LISP
+- ML, Haskell, and F# are also functional programming languages, but use very different fyntax
+  - We can distringuish between pure functional languages (e.g. Haskell) and others that provide a mix of functional and imperative (e.g. F#)
+### COBOL
+- **CO**mmon **B**uisness **O**riented **L**anguage
+- First design meeting in 1959
+- Design goals
+  - Must look like simple english
+  - Must be easy to use, even if tat means it will be less powerful
+  - Must broaden the base of computer users, presumably to include non-progammers
+  - Must not be biased by current compiler problems
+- Design committee members were all from computer manufacturers and DoD branches
+- Syntax based loosely on a language called Flow-Matic
+### COBOL code
+``` cobol
+IDENTIFICATION DIVISION
+PROGRAM-ID. Multiplier.
+AUTHON. John Smith.
+* Example program using ACCEPT, DISPLAY and MULTIPLY to
+* get two single digit numbers from the user and
+* multiply them together
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01 Num1       PIC 9 VALUE ZEROS.
+01 Num2       PIC 9 VALUE ZEROS.
+01 Result     PIC 99 VALUE ZEROS.
+
+PROCEDURE DIVISION.
+DISPLAY "Enter first number (1 digit) : " WITH NO ADVANCING.
+ACCEPT Num1.
+DISPLAY "Enter second number (1 digit) : " WITH NO ADVANCING.
+ACCEPT Num2.
+MULTIPLY Num1 BY Num2 GIVING Result.
+DISPLAY "Result is = ", Result.
+STOP RUN.
+```
 ## 2.3: New Language Concepts
+### ALGOL
+- **ALGO**rithm **L**anguage
+  - Work began in the late 1950s
+  - ALGOL 60: major influential version
+- Meant to be a little more abstract
+  - Not tied to any specific computer architecture
+- Some of the many additions:
+  - Concept of data type was formalized
+  - Names could be any length
+  - Arrays could have any number of subscripts
+  - Subscripts were placed in brackets
+  - Compound statements (BEGIN ... END)
+  - IF had an ELSE-IF clause
+### ALGOL 60 sample
+```algol
+procedure Absmax(a) Size:(n,m) Result:(y) Subscripts:(i,k);
+  value n, m; array a; integer n, m, i, k, real y;
+comment The absolute greatest element of the matrix a, of size n by m,
+        is transfered to y, and the subscripts of this element to i and k;
+begin
+  integer p, q;
+  y := 0; i := k := 1;
+  for p := 1 step 1 until n do
+    for q := 1 step 1 until m do
+      if abs(a[p,q]) > y then
+        begin
+          y := abs(a[p, q]);
+          i := p; k := q
+        end
+end Absmax
+```
+### ALGOL 60 evaluation
+- Successes
+  - It was the standard way to publish algorithms for over 20 years
+  - Virtually all subsequent imperative languages are based on it (including C)
+  - First language whose syntax was formally defined by BNF (Backus Naur Form)
+    - Standard mechanism by which languages grammars are defined, even today, eg:
+    - <list> ::= <term> | <term> <optional-whitespace> <list>
+    - **Translation:** a list is made up of a single term (defined elsewhere in the grammar) OR a term, an optional whitespace, and then another list (recursive definition)
+- Downside: Never really succeeded commercially
 ## 2.4: Object Orientation and the Modern-Era
 
 # Module 3
@@ -329,7 +539,7 @@ Links:
 ## 5.5: C Strings
 ## 5.6: Parameter Passing
 
-# Module 6👍
+# Module 6
 ## 6.1: Debugging
 ## 6.2: Profiling
 
