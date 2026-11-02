@@ -110,7 +110,7 @@ Links:
 2. [**Writability:**](#evaluation-criteria-writability) The ease with which a language can be used to create programs
 3. [**Reliability**](#evaluation-criteria-reliability) Conformance to specifications (i.e. consistently does what it is expected to do)
 4. [**Cost:**](#evaluation-criteria-cost) The __total__ cost associated with the use of the language
-5. [**Others:**](#evaluation-criteria-others) Portability, Generality & well-definedness👍
+5. [**Others:**](#evaluation-criteria-others) Portability, Generality & well-definedness
 
 ### Evaluation Criteria: Readability
 - Overall simplicity
@@ -516,9 +516,97 @@ end Absmax
   - Virtually all subsequent imperative languages are based on it (including C)
   - First language whose syntax was formally defined by BNF (Backus Naur Form)
     - Standard mechanism by which languages grammars are defined, even today, eg:
-    - <list> ::= <term> | <term> <optional-whitespace> <list>
+    - ```<list> ::= <term> | <term> <optional-whitespace> <list>```
     - **Translation:** a list is made up of a single term (defined elsewhere in the grammar) OR a term, an optional whitespace, and then another list (recursive definition)
 - Downside: Never really succeeded commercially
+### APL: an early dynamic language
+- APL: **A** **P**rogramming **L**anguage
+- Characterized by dynamic typing and dynamic storage allocation
+  - Determined at runtime rather than compile time
+- This means:
+  1. Variablers are __untyped__ at the source code level
+    - A variable acquires a type when it is assigned a value
+  2. Storage is allocated to a variable when it is assigned a value
+### APL evaluation
+- Designed originally as a hardware description language (not an actual programming language) at IBM by Ken Iverson around 1960
+  - Highly __expressive__ (many operators, for both scalars and arrays of various dimensions)
+  - Use of non-traditional symbols required special input mechanism
+  - Programs are __very__ difficult to read
+- Still in (very) limited use
+  - But influential in terms of the focus on dynamic execution
+### Beginnings of data abstraction: SIMULA 67
+- Designed primarily for system simulation in Norway by Nygaard and Dahl: **SIMU**lation **LA**nguage
+  - A language to model complex entities interaction across discrete time units
+  - Basic syntax based on ALGOL 60
+- Primary contributions
+  1. Co-routines - cooperating subprograms
+  2. Classes, objects and inheritance
+- Widely considered to be the first Object Oriented language
+  - Became a heavy influence for the OO design of C++
+  - Other languages, in turn, were influenced by C++ (Java)
+```simula
+Class Rectangle (width, Height); Real Width, Height;
+    ! Class with two parameters;
+  Begin
+    Real Area, Permimeter; ! Attributes;
+
+    Procedure Update;
+    Begin
+      Area := Width * Height;
+      Perimeter := 2*(Width + Height)
+    End of Update;
+
+    Boolean Procedure IsSquare;
+      IsSquare := Width=Height;
+    
+    Update;   ! Initialize new rectangle;
+    OutText("Rectangle created: ");
+    OutFix(Width,2,6);
+    OutFix(Height,2,6);
+    OutImage
+
+  End of Rectangle;
+```
+### C - 1972
+- Designed for systems programming
+  - Developped at Bell Labs by Dennis Richie
+  - In conjunction with the UNIX OS
+- Evolved primarly from BCLP and B, but also ALGOL 68
+- Powerful set of operators, but relatively weak type checking 
+  - Initial version did not even check function parameters
+- Not particularly innovative itself
+  - Initially spread through UNIX (at universities)
+  - __**Free**__ open source compilers
+- Though designed as a systems language, it has been used in many application areas
+### PROLOG
+- **PRO**gramming **LOG**ic
+- Developed by Comerauder and Roussel (University of Aix-Marseille) in early 1970s
+- Based on formal logic
+  - Non-procedural (no function/method definition)
+  - relied on the application of "rules"
+- Can be summarized as being an intelligent database system that uses an inference process to infer the truth of given queries
+- Comparatively inefficient
+- Few application areas
+  - Sometimes used to do matching again things like a family tree or animal kingdom
+### PROLOG example
+- Assuming the following rule set
+```prolog
+mother_child(trude, sally).
+
+father_child(tom, sally).
+father_child(tom, erica).
+father_child(mike, tom).
+
+sibling(X,Y)  :- parent_child(Z, X), parent_child(Z, Y).
+
+parent_child(X, Y) :- father_child(X, Y).
+parent_child(X, Y) :- mother_child(X, Y).
+```
+- A query could be resolved as follows
+```prolog
+?- sibling(sally, erica)
+  Yes
+```
 ## 2.4: Object Orientation and the Modern-Era
 
 # Module 3
