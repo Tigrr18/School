@@ -608,10 +608,191 @@ parent_child(X, Y) :- mother_child(X, Y).
   Yes
 ```
 ## 2.4: Object Orientation and the Modern-Era
+### Smalltalk
+- Developed at Xerox PARC through the 1970s, initially by Alan Kay
+  - First major release is Smalltalk 80
+  - Closely associated with the development of graphical desktops
+- While Simula introduces basic OO concepts, Smalltalk brought these concepts to maturity
+  - Data abstraction, inheritance, dynamic binding, and reflection
+  - __**Everything**__ is an object, even primitive type like ints and floats
+- Smalltalk was also a major influence for fundamental software engineering principles
+  - What we now call design patterns
+### Smalltalk example
+- In general, smalltalk syntax is quite different than the ALGOL influence languages like C, C++ and Java
+- Still, it's easy to see the structure OOP format of a class definition
+- Note the INIT constructor and the |local variable| syntax
+### C++
+- Developed at Bell Labs by Bjarnee Stroustrup in 1980
+- Evolved from C and SIMULA 67
+  - Facilities for OOP
+  - Roughly described a "C with objects"
+- A large and complex language, in part because it supports both procedural and OOP
+  - Very fast code bu not necessarily fast development time
+- Rapidly grew in popularity, along with OOP
+- Various ANSI standards
+  - C11++ was a major standard
+  - More recent C++ 14 and C++ 17 exist
+### Java
+- Developed at Sun in the early 1990s
+  - C and C++ were not satisfactory for embedded electronic devices (portability issues)
+- Based on C++
+  - Significantly simplified (does not include STRUCT, UNION, pointers arithmetic, and half of the assignment coercions of C++)
+    - Current versions are relatively complex, as many additions have been made over the years
+  - Supports *only* OOP (even "main" is in a class)
+  - Has object references, but not explicit memory pointers
+  - Includes support for applets and a form of thread-based concurrency
+### Java evaluation
+- eliminated many unsafe features of C++
+- Supports concurrency
+- Huge standard libraries
+  - For applets, GUIs, database access
+- Portable: 
+  - JVM concept (simulated CPU)
+  - JIT compilers (provides native machine code "on the fly")
+- Used across many application domains
+- Use increased faster than any previous language
+- One of the most widely used of all languages at the current time
+### Modern dynamic languages
+- From the 1990s onwards, a number of "dynamic" languages have emerged.
+- While there is no one definition, dynamic languages typically include run-time opportunities for:
+  - Modifying types
+  - Modifying classes
+  - Extending the code of the current application
+- Examples include: 
+  - Python
+  - Ruby
+  - Lua
+- Advantages
+  - Great flexibility
+- Drawbacks
+  - Typically slower (sometimes a lot slower)
+  - Fewer compile time checking for "code correctness"
 
 # Module 3
 ## 3.1: Intro to C
+### Module 3 topics
+- Basic structures of a C program
+- trivial compilation
+- CPP: the C preprocessor
+- File inclusion
+- The standard libraries
+- Printing to the console
+### Basic structure
+- A simple C program will look fairly similar to a simple Java program, including:
+  - A "main" method/function
+  - Simple assignment statements
+  - Basic Input/Output mechanisms
+- The core syntax is essentially the same
+  - Semi colons to terminate statements
+  - Curly braces to designate code blocks
+  - Basic conditional statements and looping constructs
+  - Function *Signatures* consisting of a return type, function name and parameter list
+### Hello world
+```c
+#include <stdio.h>
+int main (int argc, char* arvg[]) {
+  printf("Hello World\n");
+  return 0;
+}
+```
+- The main function is the starting point of your C application
+  - __Argument count__ and __list of arguments__ is automatically passed to application
+- ***MAIN*** returns an int
+  - If a return value is not provided, defaults to return 0
+  - By convention, 0 nis used for a valid exit, and a non-zero integer is used to return some kind of error to the calling program
+### Compilation
+- When using an IDE like Eclipse, you often use a "build" button
+- C programs are compiled into *object code* by a compiler
+  - **GCC** (**G**NU **C**ompiler **C**ollection) is probably the most common open source version compiler
+  - **CLANG** is also widely available (common on mac)
+  - Other sustems (windows, Unix, BSD, etc) may have their own variations
+  - All C compilers should understand the same source files, assuming they conform to a recent C language standard
+### GCC
+- We will be using **GCC**, the default Linux compiler and the one typically found on Concordia Systems
+- GCC is a VERY complex program
+  - [An online display of the gcc manual](https://gcc.gnu.org/ONLINEDOCS/GCC/OPTION-SUMMARY.HTML#OPTION-SUMMARY) will show hundreds of command line options
+- Fortunately, only a handful are needed when learning to program in C
+  - In fact, if you use Eclipse or another IDE, it will provide these for you
+- The following trivial command will produce an executable with the default name a.out
+``` 
+gcc hello.c
+```
+- to run the program and see the output:
+```
+a.out
+Hello World
+```
+- Of course, we can also give our executable a proper name using the -o switch
+```
+gcc -o myapp hello.c
+```
+### Compilation warnings
+- You should ALWAYS compile your code with warning messages enabled to ensure code wont compile with obvious problems
+- With GCC, use the -Wall flag
+  - This means print all warnings
+  - There are other options besides "all, but all warnings is always very informational
+- So our compilation command would now be:
+```
+gcc -Wall fileq.c file2.c myApp.c
+```
+### Build generators
+- Large C/C++ projects are typically not compiled and linked "manually" 
+- Instead, a *build system generator* is used to define a set of rules that perform these tasks automatically
+- Historically, developers have used **make** for this task
+  - In practice, build mantainers write makefiles that define the relationships between all build compoinents
+- IUnfortunately, makefile syntax is quite obscure and large make-based projects can be hard to maintain
+### Cmake
+- **Cmake** is a *metabuild* system that is used to generate makefiles (or other build files)
+- Cmake provides its own programnming language and can be used to support incredibly complex projects
+- Fortunately, a handful of simple cmake directives can be used for small projects/apps
+- The basic logic is simple
+  1. Place your cmake directives in a file called CMakeLists.txt
+  2. Run "cmake CMakeLists.txt" to generate the makefiles
+  3. Now simply type "make" at the command line to build your code
 ## 3.2: Preprocessing and Header Files
+### CPP: The C preprocessor
+- C makes use of a pre-processor called **CPP**
+- In short, CPP examines the source code befor the compiler
+  - It identifies any special CPP directives
+  - It transforms (re-writes) your source code into an intermediate source file
+  - It passes the new source file to the compiler
+- CPP is called automatically by GCC when you compile a source file
+- However, it can also be invoked as an independent program
+  - By default it prints its output to the screen
+```
+cpp hello.c
+```
+### CPP directives
+- CPP understands a small set of about 20 directives
+  - Each begins with the # symbol
+- In practice, there are three forms that you will typically use as a programmer
+  1. File inclusion
+```c
+  #include <file> //paste a file directory into your source code
+```
+  2. Macros
+```c
+  #define <content> //These are pure textual substitutions, typically used for definition of constraints or compact form of very simple functions
+```
+  3. Conditional inclusion
+    - For reasons that will become obvious later, we sometimes include pre-processed content only under certain conditions
+    ```
+    #ifndef <label> //if the label has not been definedn elsewhere, include the code that follows
+    ```
+    - There are variations for #ifdef as well
+### CPP directive substitution
+- It is very important to understand that CPP directives are NOT part of the C language (i.e not part of the language grammar)
+- In fact, if GCC was to encounter a #include directive, it would produce an invalid syntax error immediately
+- The directives are only seen by CPP and are then replaced by the content of the directive
+- GCC **NEVER** knows anything about them
+  - It only sees the extended output created by CPP
+### Header files
+- In the previous hello.c program, note the 
+```c
+#include <stdio.h>
+```
+  - This CPP directive tells the preprocessor to patch the contents of the file stdio.h into the source file at exactly this point.
+### Standard headers 
 ## 3.3: Console Display
 
 # Module 4
