@@ -793,6 +793,46 @@ cpp hello.c
 ```
   - This CPP directive tells the preprocessor to patch the contents of the file stdio.h into the source file at exactly this point.
 ### Standard headers 
+- stdio.h is an example of a *standard header file*
+- In short, such files are included as part of thje OS/Language distribution
+- These files are located in pre-defined folders that CPP and the compiler will always search
+  - this is why no additional path information is included with the name
+- Standard headers use the ```<file>``` notation style
+  - user defined use the ```"file"``` notation style
+- Every OS/Platform can define their own standard header folders
+  - on UNIX/Linux this wil almost always at least include /usr/include
+  - use ```ls /usr/include``` to see a list of common header files
+  ### What is stdio.h?
+  - standard input/output
+    - Most common of all C header files
+    - Provides the API for basic IO operation, including disk IO and screen/keyboard IO
+  - Overview of the API can be obtained online
+### More header files
+- Most common (out of about 30)
+  - stdio.h : input/output
+  - stdlib.h : general utilities including memory management and random numbers
+  - string.h : character string processing
+  - math.h : common math functions
+  - time.h : basic time/data utilities
+- Easily possible to find full list of header files online
+### Why do we need them?
+- C compilation is essentially a line-by-line process, from the top to the bottom of the source file
+- Compiler will generate an error if it encounters an identifier that has not already been defined
+- It also wants to know what the return types are for each function invocation
+- The header files contain the ***declarations*** for various functions
+  - a declaration provides basic type information for the compiler
+- This is important since the compiler compiles each source file independently
+  - It does not know that this function is properly defined in another source file
+- example, stdio.h includes a declaration for printf(), which gets patched into the source code at the top of the file
+  - you can invoke printf() safely later in the code since the compiler has seen the function prototype prior
+  - If you see an error like "implicit declaration of function", the you probably forgot to associate the header file (the compiler hasn't seen the function before)
+### The C standard libraries
+- As with any languages, a set of development libraries are included with the C language distributiopn
+  - Header file is associated with each individual library
+- Unlike most languages, the C library isn't very big
+  - Makes sense considering it was created as a "systems" language that would support Unix
+  - Large SDKs (software development kit) weren't necessary at that time since there wasn't a lot of "application" programming
+  - C has been around for a long time, so there are a lot of 3rd party C libs available, such as GTK+, which can be used to build sophisticated graphical user interfaces (GUIs)
 ## 3.3: Console Display
 
 # Module 4
