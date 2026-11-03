@@ -834,6 +834,59 @@ cpp hello.c
   - Large SDKs (software development kit) weren't necessary at that time since there wasn't a lot of "application" programming
   - C has been around for a long time, so there are a lot of 3rd party C libs available, such as GTK+, which can be used to build sophisticated graphical user interfaces (GUIs)
 ## 3.3: Console Display
+### Printing to the screen
+- Before we can look at more useful programs, we need to be able to display results conveniently
+- C provides the printf() function for this purpose (the "f" is for format)
+- Unlike java, (and other languages), you have to do a little more manual formatting
+  - Specifically, you must embed __type substitution symbols__ in the print string.
+  - The values of specific variables are then substitutes in the text string before being displayed
+- The stdio.h prototype for printf() looks kike this:
+  - extern int printf (const char *_restrict_format, ...);
+  - note that the "..." is a mechanism that supports variable length argument lists
+### Printf()
+- The basic form use of printf() is as follows
+```c
+printf(formatting string, variable list);
+```
+- the % sign represents the substitution character
+- examples:
+```c
+printf("hello world"); //hello world
+printf("I am %d", age); //I am 103
+printf("Items: %d, value: %f", count, sum); // Items: 6, value: 34.5
+```
+### Printf output specifiers
+- Each valid C data type has its own **output speficier**
+- Main ones:
+  - d or i: decimal integer
+  - f: floating point value
+  - s: character string
+  - c: individual charater
+  - p: pointer address value
+- There are also flags for additional things like
+  - Left/right justification
+  - Leading zeros
+  - minimum number of digits (padded with blanks, if necessary)
+  - Numeric precision (for "f", number of digits after the decimal)
+- A list of all of the specifiers and flags available online
+### Printing error messages
+- While it is possible to use printf to display error or warning messages, you should **not** do this
+- Instead, use fprintf (stderr, message, variable_list)
+- Why?
+  - printf attempts to increase the efficiency of your I/O
+  - Soecifically, it uses a buffered file stream
+  - the OS is only asked to do I/O when the buffer is full
+  - this is good, but small messages can sit in the buffer for a long time
+- Errors and warnings should print immediately
+  - stderr is __unbuffered__ so the messages goes to the OS as soon as fprintf is called
+  - The os still decides when to write to the screen, but this is usually almost immediately
+  - Note that Java and C++ have similar error streams, you should use them as well
+### Recap
+- The first three modules in this sections have introduced the most basic features of C
+  - design of simple program
+  - basic syntax
+- In the following sections, we will continue to add features in order to produce fully functional C programs
+  - As we do, the differences relative to java will become more apparent
 
 # Module 4
 ## 4.1: Functions and Files
