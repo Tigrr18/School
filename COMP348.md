@@ -890,7 +890,119 @@ printf("Items: %d, value: %f", count, sum); // Items: 6, value: 34.5
 
 # Module 4
 ## 4.1: Functions and Files
+### Basic C structure
+- C is what is known as an imperative, procedural language
+  - __Imperative__ languages use a series of *statements*, each of which can modify the *state* of the program
+    - In short, we are telling the computer HOW to produce its output
+    - This contrasts with *declarative* languages (like SQL database language) that simply indicate what output you would like to see
+  - __Procedural__ simply indicates that programming logic can be encoded as procedures or sub-routines that can be called from other locations in the code.
+    - It is the most basic form of __structured programming__
+### OOP vs non-OOP
+- Note that OO languages also use methods to provide "sub-routines" but also couple data with the methods that operate on them
+  - Imperative procedural languages do not do this
+- C is not OO - The C compiler has absolutely no understanding of classes, that is for C++
+### Procedures in practice
+- C programs consist entirely of the Main() function and an arbitrary series of additional functions that are infoked from main (or from functions invoked from main)
+  - same as java basically, except main() does not belong to functions, nor do any of the other functions
+### Multi-file application
+- As is the case with other languages, C source code is typically distgributed across multiplesource files
+  - Instead of a division based upon classes, the code is simply organized around logical functionality
+  - Functions associated with a certain objective/task are organized into a single source file
+- Source files are compiled separately, and then linked together via #include into a single executable
+  - allows changes to big programs much easier
+### Multi-file compilation
+- Large applications can consist of many many files
+- they can be spread across folders and will require a complex build environments
+- typically supported by the use of __makefiles__
+  - use a special syntax/language to define how the files should be compiled and linked into a single application or library
+- Makefile and its syntax can be very complex, so meta build system like cmake can be used
+### Simple multi-file compilation
+- For smaller apps, not necessary, can just list all files 
+```
+gcc file1.c file2.c myapp.c
+```
+- above statement assumes
+  - these are all C source files
+  - only one of these files would contain a main function
 ## 4.2: Creating Header Files
+### Things to keep in mind
+- with multiple source files, functions will be invoked by functions in other source files
+- C compilers want to know about the functions before they are invoked
+  - Most importantly needs to know size (type) of return value
+  - If not provided, "implicit function declaration" error
+- Provide the "calling" source file with the "external" function declaration it will be using. If we don't do this, the compiler will go wild using "defualt" information, which is not what we want
+### Easy way
+- It is possible to simply include the prototypes in the source file manually
+  - convension is to place the statements at the top of the file, typically after include directives
+- for an external method (one defined in another source file) called do_something(), it might look like this:
+```c
+#include <stdio.h>
+
+int do_something(int x); //prototype
+
+void my_method(){
+  int y = do_something(4);
+}
+```
+### Drawbacks of manual inclusion
+- While it works, it is generally not a good idea for these reasons:
+  1. may be many external functions, this represents a lot to add manually
+  2. external function will be invoked from many source files, so the manual inclusion would have to be repeated for each file
+  3. if the API changes (if the function name is modified), every "calling" source file would need to be modified
+### New header files
+- The "proper" way is creating header files that expose the API of the functions to be used
+- Its our own versions of standard header files like stdio.h
+- We have to create a .h file and create the prototypes in that file
+  - typically, same name as the .c file, but with .h
+    - ex: graphics.c, graphics.h
+### Simple example
+- example of the above:
+```c
+/*foo_lib.c*/
+int do_something(int x){
+  return x*99;
+}
+
+/*foo_lib.h*/
+int do_something(int x);
+```
+- source file would now be:
+```c
+#include <stdio.h>
+
+#include "foo_lib.h"
+
+void my_method(){
+  int y = do_something(4);
+}
+```
+- Note the following:
+  - quote chars are used for header file since its not a standard header file
+    - aka its not in /usr/include
+  - We assume all files are in the same folder. if not, more info needed about path in the #include directive
+  - also possible to provide compiler with extra "include directories"
+    - allows compiler to find user-defined header files the same as standard ones
+    - GCC provides a set of "i" (include) command line options
+### Header guards
+- In practice, your header files probably should look like this:
+```c
+#ifndef foo_lib_H_
+#define foo_lib_H_
+
+int do_something(int x);
+
+#endif
+```
+- The statements represent *conditional* CPP directives
+- ensures that only one copy of this header file gets included in the source file when its being compiled
+  - called header guard
+- Conditional inclusion IMPORTANT because multiple inclusion can cause compilation problems 
+  - Multiple inclusion happens because many source files include the same header file
+- Header guards are used to "flag" CPP that tells it it's been included already
+  - inclusion will be skipped after its been defined once
+- Note that a duplication inclusion of a function prototype doesn't generally cause a problem, its just redundant
+  - Other C declarations that the compiler will not accept a second time
+  - errors for this duplicate inclusion can be very confusing
 ## 4.3: Visibility
 
 # Module 5
