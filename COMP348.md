@@ -305,6 +305,8 @@ Links:
 - Major influences on language design have been machine architecture and software development methodologies
 - The primary methods of implementing programming languages are compilation, pure interpretation, and hybrid implementations
 
+[Back to top](#comp-348---principles-of-programming-language)
+
 # Module 2
 ## 2.1: Historical Language Evolution
 ### Module 2 topics
@@ -668,6 +670,8 @@ parent_child(X, Y) :- mother_child(X, Y).
   - Typically slower (sometimes a lot slower)
   - Fewer compile time checking for "code correctness"
 
+[Back to top](#comp-348---principles-of-programming-language)
+
 # Module 3
 ## 3.1: Intro to C
 ### Module 3 topics
@@ -888,6 +892,8 @@ printf("Items: %d, value: %f", count, sum); // Items: 6, value: 34.5
 - In the following sections, we will continue to add features in order to produce fully functional C programs
   - As we do, the differences relative to java will become more apparent
 
+[Back to top](#comp-348---principles-of-programming-language)
+
 # Module 4
 ## 4.1: Functions and Files
 ### Basic C structure
@@ -1051,6 +1057,8 @@ static int helper(){
 - **NOTE:** static functions should NOT be included in the ehader files since they are not part of the API
 - **NOTE:** when youa dd a prototupe for a static function in the current source file, both the prototype and the full function definition should include the static specifier
 
+[Back to top](#comp-348---principles-of-programming-language)
+
 # Module 5
 ## 5.1: Basic Data Types
 ### Section 5 topics
@@ -1108,9 +1116,13 @@ static int helper(){
 ## 5.5: C Strings
 ## 5.6: Parameter Passing
 
+[Back to top](#comp-348---principles-of-programming-language)
+
 # Module 6
 ## 6.1: Debugging
 ## 6.2: Profiling
+
+[Back to top](#comp-348---principles-of-programming-language)
 
 # Module 7
 ## 7.1: Python Intro
@@ -1118,10 +1130,14 @@ static int helper(){
 ## 7.3: Composite Data Types
 ## 7.4: Computational Complexity
 
+[Back to top](#comp-348---principles-of-programming-language)
+
 # Module 8
 ## Module 8.1: List Extensions
 ## Module 8.2: Dictionaries
 ## Module 8.3: Tuples and Sets
+
+[Back to top](#comp-348---principles-of-programming-language)
 
 # Module 9
 ## Module 9.1: Control Flow
@@ -1261,3 +1277,5 @@ def foo(n, m=4, z=3):
 
 foo(3, z=7) #okay call, m is default to 4
 ```
+
+[Back to top](#comp-348---principles-of-programming-language)
