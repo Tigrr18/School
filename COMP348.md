@@ -1004,9 +1004,104 @@ int do_something(int x);
   - Other C declarations that the compiler will not accept a second time
   - errors for this duplicate inclusion can be very confusing
 ## 4.3: Visibility
+### Function visibility
+- since not an OO programming language, there is no public/private 
+  - always global to the entire application
+  - can be invoked from any other source file (by including a prototpe in the calling file)
+- Not great to structure code, because there is no nothin of an API, since all functions are part of the API, essentially makes it so that everything is public
+- While our header files contain the functions we WANT others to use, there is nothing (so far) that prevvents us to add a prototype for a method that is not in a header file
+  - aka, anyone can use a function coded in a source file by manually adding the prototype to the function, even if it isn't included in the header
+### Static functions
+- One of the most basic visbility modifying mechanisms is "static" specifier that can be used to qualify function definitons or global variables
+- by using static with a functions, it tells the compiler that this function can only be referenced/invoked from the source file in which it is written, kinda like calling the method private 
+- lets say the earlier do_something() uses a private "helper" function
+- The source code should be:
+```c
+static int helper(){
+  return 10;
+}
+
+int do_something (int x){
+  int value = helper();
+  return value * x;
+}
+```
+- Here, helper() is now invisible to the outside world, but do_something() is publically available
+###Function location
+- function implementation can be in any order in source file
+  - even main() can be anywhere in the file, but it is typicallt either first or last
+- cannot invoke a function in the same source file if the compiler has not seen the function declaration already
+  - will give implicit declaration warning
+  - will happen even if you only have one source file
+- this is therefore a BAD example;
+```c
+int do_something (int x){
+  int value = helper();
+  return value * x;
+}
+
+static int helper(){
+  return 10;
+}
+```
+- Instead, we can do a few things
+  - make sure the helper() function is defined first
+  - include a prototype for helper() at the top of the source file
+  - header files can be (and typically are) included in the source file associated to the header
+- **NOTE:** static functions should NOT be included in the ehader files since they are not part of the API
+- **NOTE:** when youa dd a prototupe for a static function in the current source file, both the prototype and the full function definition should include the static specifier
 
 # Module 5
 ## 5.1: Basic Data Types
+### Section 5 topics
+- Basic data types
+- Data type size
+- C arrays
+- Composite data types
+- Forms of memory allocation
+- Creating data elements dynamically
+- Use of pointers
+### Basic data types
+- primitive data types derived from integer types and floating point types
+- Ints can be of different forms
+  - char
+  - short int
+  - int
+  - long int
+  - long long int
+- All integers can use a signed (default) or unsigned form
+- Floating type can take different forms:
+  - float
+  - double
+  - long double
+- the C99 standard also includes a boolean type called bool in the stdbool.h
+  - allows tests against true and false
+- if compiler does not support boolean type
+  - #define true 1
+  - #define false 0
+  - add these in a header file that is available in project
+- Types are very different from java, since size is always the same in java, but not in C
+  - ex, int in Java is always 4 bytes
+  - in C, an int may be 2, 4, or 8 bytes
+  - one of the reasons C isn't portable
+- in theory, this is the same for floats and doubles
+  - in practioce, single and double precision floating point values are quite consistent
+- Doesnt mean C code cant be ported, just means we have to be aware of those issues
+### Does this matter?
+- There are times where it will matter, if for example we are using big integers
+  - ex a number like 10,000,000,000 needs an 8 byte integer, and if you try to use a 4-byte integer, the result will be garbage
+- Compiler may compile but might
+  1. run perfectly if the numbers arent too big
+  2. run but produce incorrect results if the results are too large
+  3. run but fail at run-time if there are conditional checks that rely on those values
+### How do we know what we have?
+- In serious commercial applications, you should ensure to be using the right types
+- C provides a sizeof operator to determine the byte count of a given type
+- sizeof can be used with *types* or *variables*
+  - when used with data types, the type value must be enclosed in parentheses
+    - sizeof (int)
+    - sizeof foo (if foo is a variable)
+- sizeof can also be used with complex data types
 ## 5.2: Arrays and Structs
 ## 5.3: Static and Automatic Memory Allocation
 ## 5.4: Dynamic Memory Allocation
